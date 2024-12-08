@@ -1,0 +1,3 @@
+together==1.2.0
+wikipedia-api
+numpy<2
