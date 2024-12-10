@@ -22,7 +22,7 @@ class Coordinator:
         if current_label + next_label in self.story_json:
             return self.story_json[current_label + next_label]
         else:
-            # TODO: dynamic generation
+            # TODO: dynamic generation + update json
             pass
 
 
