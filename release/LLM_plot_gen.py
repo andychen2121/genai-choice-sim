@@ -2,7 +2,6 @@ import wikipediaapi
 import json
 from together import Together
 
-GENERATION_THRESHOLD = 8
 MAX_RETRIES = 5
 
 wiki_wiki = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)', 'en')
@@ -174,6 +173,7 @@ def assert_valid_json(json_str):
 def populate_JSON(context,
                   previous_scenario, previous_choice,
                   label_idx,
+                  generation_threshold,
                   num_choices=4, choices_left=10):
     """
     Recursively populates a JSON structure for a branching storyline.
@@ -182,12 +182,13 @@ def populate_JSON(context,
     - `context` (str): The overall storyline context to guide the creation of new continuations.
     - `previous_scenario` (str): The preceding storyline scenario from which new continuations branch.
     - `previous_choice` (str): The player's previous choice that led to the current scenario.
-    - 'label_idx' (str): Label for generated choice, used to id/navigate all_jsons.
+    - `label_idx` (str): Label for generated choice, used to id/navigate all_jsons.
+    - `generation_threshold` (int): The number of branching layers left to create before recursive static generation stops. 
     - `num_choices` (int): The number of branching choices to create at each step. Default is 4.
     - `choices_left` (int): The remaining depth of choices before the story concludes.
     """
 
-    if choices_left <= GENERATION_THRESHOLD:
+    if generation_threshold <= 0:
       return
 
     # Assert generated JSON is validly formatted given MAX_RETRIES
@@ -213,15 +214,16 @@ def populate_JSON(context,
     for id, choice in enumerate(parsed_data.get("choices")):
         current_choice = choice["action"]
         populate_JSON(context,
-                      previous_scenario=current_scenario,
-                      previous_choice=current_choice,
+                      previous_scenario = current_scenario,
+                      previous_choice = current_choice,
                       label_idx = label_idx + str(id + 1), # 1-indexed to match choice idxs
-                      num_choices=num_choices,
-                      choices_left=choices_left-1)
+                      generation_threshold = generation_threshold - 1,
+                      num_choices = num_choices,
+                      choices_left = choices_left - 1)
 
 
 # Only method we externally should interact with; other methods are abstracted
-def create_story(IP, num_choices=4, choices_left=10):
+def create_story(IP, num_choices=4, choices_left=10, generation_threshold=2):
     """
     Creates a branching interactive story based on a specific intellectual property (IP), generating storylines recursively.
 
@@ -229,10 +231,15 @@ def create_story(IP, num_choices=4, choices_left=10):
     - `IP` (str): The intellectual property (e.g., movie, book, or game) to base the story on.
     - `num_choices` (int): The number of branching choices to create at each stage of the storyline. Default is 4.
     - `choices_left` (int): The total depth of choices before the story concludes.
+    = `generation_threshold` (int): The number of branching layers to create before recursive static generation stops. 
 
     Returns:
         JSON containing all data generated.
     """
+    # Prevent generating more than choices_left
+    if generation_threshold > choices_left:
+        raise ValueError("generation_threshold cannot be greater than choices_left.")
+
     # Assert generated JSON is validly formatted given MAX_RETRIES
     for attempt in range(1, MAX_RETRIES + 1):
         story = initialize_story(IP, num_choices)
@@ -254,11 +261,12 @@ def create_story(IP, num_choices=4, choices_left=10):
         # context for each branch is initial context + overall plot of specific branch
         context = initial_context + " " + story_line
         populate_JSON(context,
-                      previous_scenario=None,
-                      previous_choice=None,
+                      previous_scenario = None,
+                      previous_choice = None,
                       label_idx = str(id + 1), # 1-indexed to match choice idxs
-                      num_choices=num_choices,
-                      choices_left=choices_left)
+                      generation_threshold = generation_threshold,
+                      num_choices = num_choices,
+                      choices_left = choices_left)
     
     return all_jsons
 
