@@ -1,4 +1,4 @@
-"""import firebase_admin
+import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import json
 import uuid
@@ -76,4 +76,4 @@ doc_watch = doc_ref.on_snapshot(on_snapshot)
 
 # Keep the script running
 while True:
-    time.sleep(1)"""
+    time.sleep(1)
