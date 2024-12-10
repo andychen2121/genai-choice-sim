@@ -28,7 +28,7 @@ class Coordinator:
     
     # dynamically generate as needed
     def continue_story(self, current_label, next_label):
-        if current_label + next_label in self.story_json: #next node exists
+        if current_label + next_label in self.story_json: # next node exists
             return self.story_json[current_label + next_label]
         else:
             context = self.story_json[""]
@@ -61,5 +61,5 @@ class Coordinator:
 if __name__ == '__main__':
     coord = Coordinator()
     coord.initialize_storyline('League of Legends')
-    print(coord.continue_story("123111111", "1"))
+    print(coord.continue_story("112", "4"))
 """

@@ -18,13 +18,16 @@ bucket = storage.bucket()
 # Initialize Coordinator
 coordinator = Coordinator()
 
+# Keeps track of current choice
+curr_choice = ""
+
 def on_snapshot(doc_snapshot, changes, read_time):
     for change in changes:
         doc = change.document
         data = doc.to_dict()
         
         # Check what type of change occurred
-        if change.type.name == 'ADDED':
+        if change.type.name == 'initialStory':
             # Condition 1: Game was just created.
             # For example, you might check if a field 'status' == 'new_game'
             if data.get('status') == 'new_game':
@@ -47,7 +50,7 @@ def on_snapshot(doc_snapshot, changes, read_time):
                     'status': 'initialized'  # Mark that static generation is done
                 })
         
-        elif change.type.name == 'MODIFIED':
+        elif change.type.name == 'choice':
             # Condition 2: Dynamic generation triggered.
             # For example, check if a field 'action' == 'continue_story' or some field changes.
             if data.get('action') == 'continue_story':
@@ -66,6 +69,8 @@ def on_snapshot(doc_snapshot, changes, read_time):
                     'partial_storyline_id': partial_id,
                     'action': firestore.DELETE_FIELD  # or set it to None
                 })
+
+                curr_choice += choiceID
 
         # If you want to handle REMOVED or other cases, do so here.
 
