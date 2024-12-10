@@ -57,7 +57,9 @@ class Coordinator:
 
             return self.story_json[current_label + next_label]
 
+"""
 if __name__ == '__main__':
     coord = Coordinator()
     coord.initialize_storyline('League of Legends')
     print(coord.continue_story("123111111", "1"))
+"""
