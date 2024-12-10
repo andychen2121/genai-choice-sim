@@ -5,7 +5,7 @@ from together import Together
 MAX_RETRIES = 5
 
 wiki_wiki = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)', 'en')
-client = Together(api_key='')
+client = Together(api_key='0256f61cf32560dba2fb9c36573f46b473dbd1f2f0d95a731eeaf01b458e7bed')
 all_jsons = {}
 
 def get_plot(title):
@@ -35,6 +35,8 @@ def generate_continuation(context, previous_scenario=None, previous_choice=None,
     Generates a continuation of the story based on the given context and an optional choice.
     choices_left details the amount of urgency left, to account for story pacing.
     """
+    if choices_left == 0:
+        return generate_final(context, previous_scenario, previous_choice)
 
     system_prompt = f"""
     Your job is to tell a continuation of the story based on what previously happened.
@@ -84,6 +86,51 @@ def generate_continuation(context, previous_scenario=None, previous_choice=None,
 
         Plot Summary: {context}
         """
+        
+    try:
+        output = client.chat.completions.create(
+            model="meta-llama/Llama-3-70b-chat-hf",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt}
+            ],
+        )
+        return output.choices[0].message.content
+    except Exception as e:
+        print(f"Error during generation: {e}")
+        return None
+
+def generate_final(context, previous_scenario, previous_choice):
+    """
+    Generates the conclusion of the story based on the given context and choice.
+    """
+    system_prompt = f"""
+    Your job is to tell the conclusion of a story based on what previously happened.
+    You will be given the overall plot synopsis to help guide the ending.
+
+    Instructions:
+    - Use simple, clear language that is easy to understand and avoids being overly descriptive.
+    - Stay in third-person point of view.
+    - Ensure each branching storyline offers meaningful player choices and consequences.
+    - Stay concise, limiting each storyline description to 3-5 sentences.
+    - All outputs should be in JSON format like so. Do not include anything else:
+    {{
+    "story_continuation": "[Your story continuation here]"
+    }}
+    """
+
+    prompt = f"""
+    Write a satisfying conclusion to the story.
+    All outputs should be in JSON format. Do not include anything else.
+
+    The following scenario has just occured:
+    {previous_scenario}
+
+    The player made the following choice:
+    {previous_choice}
+
+    Plot Summary: {context}
+    """
         
     try:
         output = client.chat.completions.create(
