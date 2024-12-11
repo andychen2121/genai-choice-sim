@@ -6,7 +6,7 @@ from LLM_plot_gen import generate_continuation, assert_valid_json, MAX_RETRIES
 
 class Coordinator:
     def __init__(self):
-        pass
+        self.current_label = ""  
     
     # statically generate first N layers of storyline
     def initialize_storyline(self, IP, 
@@ -25,41 +25,41 @@ class Coordinator:
         else:
             with open(f"{IP}.json", "r") as f:
                 self.story_json = json.load(f) 
-    
+        return self.story_json  
     # dynamically generate as needed
-    def continue_story(self, current_label, next_label):
-        if current_label + next_label in self.story_json: # next node exists
-            return self.story_json[current_label + next_label]
+    def continue_story(self, choice_id: str):
+        if choice_id in self.story_json:
+            return self.story_json[choice_id]
         else:
             context = self.story_json[""]
-            current_path = int(current_label[0])
-            current_node = self.story_json[current_label]
+            current_path = int(self.current_label[0]) if self.current_label else 1
+            current_node = self.story_json.get(self.current_label, context)
 
             for attempt in range(1, MAX_RETRIES + 1):
-                # dynamic generation for next story element
-                continuation = generate_continuation(context = context["plot_summary"] + context["branching_storylines"][current_path - 1]["story_line"], 
-                                                 previous_scenario = current_node["story_continuation"],
-                                                 previous_choice = current_node["choices"][int(next_label)-1],
-                                                 num_choices = self.num_choices,
-                                                 choices_left = self.choices_left - len(current_label + next_label))
+                continuation = generate_continuation(
+                    context=context["plot_summary"] + context["branching_storylines"][current_path - 1]["story_line"],
+                    previous_scenario=current_node["story_continuation"] if "story_continuation" in current_node else "",
+                    previous_choice=current_node["choices"][int(choice_id)-1],
+                    num_choices=self.num_choices,
+                    choices_left=self.choices_left - len(choice_id)
+                )
+
                 if assert_valid_json(continuation):
                     break
                 elif attempt == MAX_RETRIES:
                     print(f"Failed to parse JSON after {MAX_RETRIES} attempts.")
                     return
-            
-            parsed_data = json.loads(continuation)
 
-            self.story_json[current_label + next_label] = parsed_data
-            # can dump self.story_json at END!
+            parsed_data = json.loads(continuation)
+            self.story_json[choice_id] = parsed_data
+            self.current_label += choice_id
+
             with open(f"{self.IP}.json", "w") as f:
                 json.dump(self.story_json, f)
 
-            return self.story_json[current_label + next_label]
+            return self.story_json[choice_id] #add to storage as well
 
-"""
 if __name__ == '__main__':
     coord = Coordinator()
     coord.initialize_storyline('League of Legends')
-    print(coord.continue_story("112", "4"))
-"""
+    print(coord.continue_story("11", "2"))
