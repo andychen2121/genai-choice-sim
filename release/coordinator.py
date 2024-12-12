@@ -1,7 +1,7 @@
 import json
 import os
-from LLM_plot_gen import create_story
-from LLM_plot_gen import generate_continuation, assert_valid_json, MAX_RETRIES
+from release.llm_model import create_story
+from release.llm_model import generate_continuation, assert_valid_json, MAX_RETRIES
 
 
 class Coordinator:
