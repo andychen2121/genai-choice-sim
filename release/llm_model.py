@@ -183,7 +183,7 @@ def initialize_story(IP, num_choices=4):
 
     plot_prompt = f"""
     Generate a creative, original adaptation of {IP}'s plot, introducing similar themes and elements while creating 4 new, engaging branching storylines for players.
-    All outputs should be in JSON format. Do not include anything else.
+    ALL OUTPUTS SHOULD BE IN JSON FORMAT! Do not include anything else.
 
     {IP} Plot Summary: {get_plot(IP)}"""
 
