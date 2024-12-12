@@ -17,14 +17,14 @@ class Coordinator:
         # self.image_pipeline = initialize_image_model() # initialize image model pipeline from image_model.py
 
         # this should instead check firestore
-        if not os.path.exists(f"{IP}.json"):
+        if not os.path.exists(f"data/{IP}.json"):
             self.story_json = create_story(IP, num_choices = self.num_choices, 
                                            choices_left = self.choices_left, 
                                            generation_threshold = self.generation_threshold)
-            with open(f"{IP}.json", "w") as f:
+            with open(f"data/{IP}.json", "w") as f:
                 json.dump(self.story_json, f)
         else:
-            with open(f"{IP}.json", "r") as f:
+            with open(f"data/{IP}.json", "r") as f:
                 self.story_json = json.load(f) 
         return self.story_json  
     
@@ -57,7 +57,7 @@ class Coordinator:
             self.story_json[choice_id] = parsed_data
             self.current_label += choice_id
 
-            with open(f"{self.IP}.json", "w") as f:
+            with open(f"data/{self.IP}.json", "w") as f:
                 json.dump(self.story_json, f)
 
             return self.story_json[choice_id] # add to storage as well
