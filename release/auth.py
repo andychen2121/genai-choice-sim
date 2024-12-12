@@ -1,17 +1,18 @@
 import json
 import os
+import time
 import threading
 from enum import Enum
 from typing import Callable
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, storage
 from coordinator import Coordinator
-
-from LLM_plot_gen import create_story, generate_continuation, assert_valid_json, MAX_RETRIES
 
 # Initialize Firebase Admin SDK if not already done.
 cred = credentials.Certificate('netflixcyoa-firebase-adminsdk-1a3hr-79f3ce291f.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {
+    'storageBucket': 'netflixcyoa.firebasestorage.app'
+})
 
 class TaskType(Enum):
     INITIAL_STORY = 'initialStory'
@@ -22,9 +23,10 @@ class FirebaseCoordinator:
         self.service_id = service_id
         self.db = firestore.client()
         self.coordinator = Coordinator()
+        self.bucket = storage.bucket()
 
     def connect(self):
-        unity_tasks_ref = self.db.collection("service").document(self.service_id).collection("tasks").document("unity")
+        unity_tasks_ref = self.db.collection("services").document("tasks").collection("unity")
         doc_watch = unity_tasks_ref.on_snapshot(self.on_unity_snapshot)
 
     def on_unity_snapshot(self, snapshot, changes, read_time):
@@ -32,9 +34,13 @@ class FirebaseCoordinator:
         This callback is triggered whenever there's an update to the unity task document.
         We check the 'type' field and process accordingly.
         """
-        for doc in snapshot:
+        for change in changes:
+            # We only care about additions
+            if change.type.name != "ADDED":
+                continue
+
+            doc = change.document
             data = doc.to_dict()
-            doc_ref = self.db.collection("service").document(self.service_id).collection("tasks").document("python")
 
             # Expecting fields: type, content, choiceId
             if "type" not in data:
@@ -42,18 +48,31 @@ class FirebaseCoordinator:
 
             action_type = data["type"]
 
-            if action_type == TaskType.INITIAL_STORY.value:
+            if action_type == TaskType.INITIAL_STORY.value:                
                 IP = data.get("content", "DefaultStory")
                 json_story = self.coordinator.initialize_storyline(IP)
+                json_data = json.dumps(json_story)
 
-                doc_ref.collection("responses").add(json_story)
+                # add to storage
+                blob = self.bucket.blob(f"{IP}.json")  # Specify the storage path
+                blob.upload_from_string(json_data, content_type='application/json')
+
+                # add to firebase
+                doc_ref = self.db.collection("services").document("tasks").collection("python").document()
+                doc_ref.set({'id': IP, 'type': 'json'})
 
             elif action_type == TaskType.CHOICE.value:
                 choice_id = str(data.get("choiceId", "1"))
                 result = self.coordinator.continue_story(choice_id)
+                json_data = json.dumps(result)
 
-                
-                doc_ref.collection("responses").add(result)
+                # add to storage
+                blob = self.bucket.blob(f"{choice_id}.json")  # Specify the storage path
+                blob.upload_from_string(json_data, content_type='application/json')
+
+                # add to firebase
+                doc_ref = self.db.collection("services").document("tasks").collection("python").document()
+                doc_ref.set({'id': choice_id, 'type': 'json'})
 
 
 if __name__ == '__main__':
@@ -66,4 +85,4 @@ if __name__ == '__main__':
     fc.connect()
 
     while True:
-        pass
+        time.sleep(1)

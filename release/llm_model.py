@@ -2,10 +2,10 @@ import wikipediaapi
 import json
 from together import Together
 
-MAX_RETRIES = 5
+MAX_RETRIES = 10
 
 wiki_wiki = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)', 'en')
-client = Together(api_key='')
+client = Together(api_key='0256f61cf32560dba2fb9c36573f46b473dbd1f2f0d95a731eeaf01b458e7bed')
 all_jsons = {}
 
 def get_plot(title):
@@ -251,7 +251,7 @@ def populate_JSON(context,
         if assert_valid_json(output):
           break
         elif attempt == MAX_RETRIES:
-          print(f"Failed to parse JSON after {MAX_RETRIES} attempts.")
+          print(f"Failed to parse JSON after {MAX_RETRIES} attempts during populate_JSON.")
           return
 
     parsed_data = json.loads(output)
@@ -293,7 +293,7 @@ def create_story(IP, num_choices=4, choices_left=10, generation_threshold=2):
         if assert_valid_json(story):
           break
         elif attempt == MAX_RETRIES:
-          print(f"Failed to parse JSON after {MAX_RETRIES} attempts.")
+          print(f"Failed to parse JSON after {MAX_RETRIES} attempts during create_story.")
           return
 
     story = json.loads(story)

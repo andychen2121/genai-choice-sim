@@ -16,6 +16,7 @@ class Coordinator:
         self.generation_threshold = generation_threshold
         # self.image_pipeline = initialize_image_model() # initialize image model pipeline from image_model.py
 
+        # this should instead check firestore
         if not os.path.exists(f"{IP}.json"):
             self.story_json = create_story(IP, num_choices = self.num_choices, 
                                            choices_left = self.choices_left, 
@@ -49,7 +50,7 @@ class Coordinator:
                 if assert_valid_json(continuation):
                     break
                 elif attempt == MAX_RETRIES:
-                    print(f"Failed to parse JSON after {MAX_RETRIES} attempts.")
+                    print(f"Failed to parse JSON after {MAX_RETRIES} attempts during continue_story.")
                     return
 
             parsed_data = json.loads(continuation)
@@ -63,5 +64,6 @@ class Coordinator:
 
 if __name__ == '__main__':
     coord = Coordinator()
-    coord.initialize_storyline('League of Legends')
-    print(coord.continue_story("11", "2"))
+    # coord.initialize_storyline('League of Legends')
+    coord.initialize_storyline('Dracula')
+    print(coord.continue_story("2"))
