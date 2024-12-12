@@ -29,14 +29,20 @@ class Coordinator:
         return self.story_json  
     
     # dynamically generate as needed
-    # image generation should dynamically occur in this method; we can store image paths in JSONs, similar to text organization
+    # TODO: image generation should dynamically occur in this method; we can store image paths in JSONs, similar to text organization
     def continue_story(self, choice_id: str):
-        if choice_id in self.story_json:
-            return self.story_json[choice_id]
+        # next node exists
+        if self.current_label + choice_id in self.story_json: 
+            # update parameters
+            self.current_label = self.current_label + choice_id
+            self.choices_left -= 1
+            return self.story_json[self.current_label]
+        
+        # dynamically generate next node
         else:
             context = self.story_json[""]
             current_path = int(self.current_label[0]) if self.current_label else 1
-            current_node = self.story_json.get(self.current_label, context)
+            current_node = self.story_json[self.current_label]
 
             for attempt in range(1, MAX_RETRIES + 1):
                 continuation = generate_continuation(
@@ -44,7 +50,7 @@ class Coordinator:
                     previous_scenario=current_node["story_continuation"] if "story_continuation" in current_node else "",
                     previous_choice=current_node["choices"][int(choice_id)-1],
                     num_choices=self.num_choices,
-                    choices_left=self.choices_left - len(choice_id)
+                    choices_left=self.choices_left
                 )
 
                 if assert_valid_json(continuation):
@@ -54,16 +60,20 @@ class Coordinator:
                     return
 
             parsed_data = json.loads(continuation)
-            self.story_json[choice_id] = parsed_data
-            self.current_label += choice_id
+            self.story_json[self.current_label + choice_id] = parsed_data
+
+            # update parameters
+            self.current_label = self.current_label + choice_id
+            self.choices_left -= 1
 
             with open(f"data/{self.IP}.json", "w") as f:
                 json.dump(self.story_json, f)
 
-            return self.story_json[choice_id] # add to storage as well
+            return self.story_json[self.current_label] # add to storage as well
 
 if __name__ == '__main__':
     coord = Coordinator()
     # coord.initialize_storyline('League of Legends')
     coord.initialize_storyline('Dracula')
-    print(coord.continue_story("2"))
+    for i in range(7):
+        coord.continue_story("1")
