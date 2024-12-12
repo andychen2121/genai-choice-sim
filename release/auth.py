@@ -1,84 +1,69 @@
-import firebase_admin
-from firebase_admin import credentials, firestore, storage
 import json
-import uuid
-import time
+import os
+import threading
+from enum import Enum
+from typing import Callable
+import firebase_admin
+from firebase_admin import credentials, firestore
 from coordinator import Coordinator
 
-# Initialize Firebase app
-cred = credentials.Certificate('/path/to/your/serviceAccountKey.json')
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'your-bucket-name.appspot.com'
-})
+from LLM_plot_gen import create_story, generate_continuation, assert_valid_json, MAX_RETRIES
 
-# Initialize Firestore DB and Storage
-db = firestore.client()
-bucket = storage.bucket()
+# Initialize Firebase Admin SDK if not already done.
+cred = credentials.Certificate('netflixcyoa-firebase-adminsdk-1a3hr-79f3ce291f.json')
+firebase_admin.initialize_app(cred)
 
-# Initialize Coordinator
-coordinator = Coordinator()
+class TaskType(Enum):
+    INITIAL_STORY = 'initialStory'
+    CHOICE = 'choice'
 
-# Keeps track of current choice
-curr_choice = ""
+class FirebaseCoordinator:
+    def __init__(self, service_id: str):
+        self.service_id = service_id
+        self.db = firestore.client()
+        self.coordinator = Coordinator()
 
-def on_snapshot(doc_snapshot, changes, read_time):
-    for change in changes:
-        doc = change.document
-        data = doc.to_dict()
-        
-        # Check what type of change occurred
-        if change.type.name == 'initialStory':
-            # Condition 1: Game was just created.
-            # For example, you might check if a field 'status' == 'new_game'
-            if data.get('status') == 'new_game':
-                # Extract IP from the doc (assuming it's stored in 'IP' field)
-                IP = data.get('IP', '127.0.0.1')
+    def connect(self):
+        unity_tasks_ref = self.db.collection("service").document(self.service_id).collection("tasks").document("unity")
+        doc_watch = unity_tasks_ref.on_snapshot(self.on_unity_snapshot)
+
+    def on_unity_snapshot(self, snapshot, changes, read_time):
+        """
+        This callback is triggered whenever there's an update to the unity task document.
+        We check the 'type' field and process accordingly.
+        """
+        for doc in snapshot:
+            data = doc.to_dict()
+            doc_ref = self.db.collection("service").document(self.service_id).collection("tasks").document("python")
+
+            # Expecting fields: type, content, choiceId
+            if "type" not in data:
+                continue
+
+            action_type = data["type"]
+
+            if action_type == TaskType.INITIAL_STORY.value:
+                IP = data.get("content", "DefaultStory")
+                json_story = self.coordinator.initialize_storyline(IP)
+
+                doc_ref.collection("responses").add(json_story)
+
+            elif action_type == TaskType.CHOICE.value:
+                choice_id = str(data.get("choiceId", "1"))
+                result = self.coordinator.continue_story(choice_id)
+
                 
-                # Initialize storyline
-                story_json = coordinator.initialize_storyline(IP)
-                
-                # Create a unique ID for the storyline
-                story_id = str(uuid.uuid4())
-                
-                # Upload the JSON to Cloud Storage
-                blob = bucket.blob(f'storylines/{story_id}.json')
-                blob.upload_from_string(json.dumps(story_json), content_type='application/json')
-                
-                # Update Firestore document with the storyline ID (and maybe a status change)
-                doc.reference.update({
-                    'storyline_id': story_id,
-                    'status': 'initialized'  # Mark that static generation is done
-                })
-        
-        elif change.type.name == 'choice':
-            # Condition 2: Dynamic generation triggered.
-            # For example, check if a field 'action' == 'continue_story' or some field changes.
-            if data.get('action') == 'continue_story':
-                # Call a method to continue the storyline
-                new_part = coordinator.continue_story(data.get('storyline_id'))
-                
-                # Generate a new partial ID
-                partial_id = str(uuid.uuid4())
-                
-                # Upload partial storyline JSON
-                blob = bucket.blob(f'storylines/{partial_id}.json')
-                blob.upload_from_string(json.dumps(new_part), content_type='application/json')
-                
-                # Update Firestore with partial storyline id and reset action
-                doc.reference.update({
-                    'partial_storyline_id': partial_id,
-                    'action': firestore.DELETE_FIELD  # or set it to None
-                })
-
-                curr_choice += choiceID
-
-        # If you want to handle REMOVED or other cases, do so here.
+                doc_ref.collection("responses").add(result)
 
 
-# Set up a listener on a specific document
-doc_ref = db.collection('your_collection').document('your_document')
-doc_watch = doc_ref.on_snapshot(on_snapshot)
+if __name__ == '__main__':
+    # Example usage
+    # Before running this, make sure you've initialized Firebase admin:
+    # cred = credentials.Certificate('/path/to/your/serviceAccountKey.json')
+    # firebase_admin.initialize_app(cred)
 
-# Keep the script running
-while True:
-    time.sleep(1)
+    fc = FirebaseCoordinator(service_id="your_service_id_here")
+    fc.connect()
+
+    while True:
+        pass
