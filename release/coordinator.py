@@ -15,6 +15,7 @@ class Coordinator:
         self.num_choices = num_choices
         self.choices_left = choices_left
         self.generation_threshold = generation_threshold
+        # self.image_pipeline = initialize_image_model() # initialize image model pipeline from image_model.py
 
         if not os.path.exists(f"{IP}.json"):
             self.story_json = create_story(IP, num_choices = self.num_choices, 
@@ -27,6 +28,7 @@ class Coordinator:
                 self.story_json = json.load(f) 
     
     # dynamically generate as needed
+    # image generation should dynamically occur in this method; we can store image paths in JSONs, similar to text organization
     def continue_story(self, current_label, next_label):
         if current_label + next_label in self.story_json: # next node exists
             return self.story_json[current_label + next_label]
