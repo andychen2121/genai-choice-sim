@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
+using FirebaseNetworkKit;
 
 public class NodeManager : MonoBehaviour
 {
@@ -18,10 +20,18 @@ public class NodeManager : MonoBehaviour
     public Button[] ChoiceButtons;  // Buttons for choices
     public TextMeshProUGUI[] ChoiceTexts; // Text on choice buttons
 
-    private bool isInitialized = false;
+    private PythonListener pythonListener; // Reference to PythonListener
 
     private void Start()
     {
+        // Find the PythonListener GameObject
+        pythonListener = GameObject.FindObjectOfType<PythonListener>();
+
+        if (pythonListener == null)
+        {
+            Debug.LogError("PythonListener GameObject not found in the scene.");
+        }
+
         // Ensure initial node is loaded when StoryData is available
         Invoke(nameof(LoadInitialNode), 3f); // Delay to ensure StoryData is loaded
     }
@@ -32,7 +42,6 @@ public class NodeManager : MonoBehaviour
         {
             Debug.Log("Loading initial node...");
             LoadNode("1"); // Replace "1" with your desired starting node ID
-            isInitialized = true;
         }
         else
         {
@@ -104,11 +113,29 @@ public class NodeManager : MonoBehaviour
             return;
         }
 
-        // Calculate the next node ID by appending the choice index to the current node ID
         string nextNodeId = CurrentStoryNode.CurrentNodeId + (choiceIndex + 1).ToString();
-
         Debug.Log($"Next Node ID: {nextNodeId}");
+
+        // Check if the next node exists
+        if (!StoryLoader.Instance.StoryData.StoryNodes.ContainsKey(nextNodeId))
+        {
+            Debug.LogWarning($"Node ID {nextNodeId} does not exist. Creating a new document in Firestore.");
+
+            if (pythonListener != null)
+            {
+                string choiceContent = CurrentStoryNode.Choices[choiceIndex];
+                string uuid = Guid.NewGuid().ToString();
+                pythonListener.UploadNewNodeToFirestore(uuid, int.Parse(nextNodeId), choiceContent);
+            }
+            else
+            {
+                Debug.LogError("PythonListener reference is null. Cannot upload to Firestore.");
+            }
+
+            return;
+        }
+
+        // Load the next node if it exists
         LoadNode(nextNodeId);
     }
-
 }

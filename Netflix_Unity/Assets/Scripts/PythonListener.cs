@@ -10,25 +10,37 @@ namespace FirebaseNetworkKit
 {
     public class PythonListener : MonoBehaviour
     {
+        public static PythonListener Instance { get; private set; } // Singleton instance
+
         private FirebaseFirestore db;
         private FirebaseStorage storage;
         private StorageReference storageRef;
 
-        private StoryLoader storyLoader;
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject); // Persist this object across scenes
+            }
+            else
+            {
+                Destroy(gameObject); // Destroy duplicates
+            }
+        }
 
         void Start()
-    {
-        // Initialize Firestore
-        db = FirebaseFirestore.DefaultInstance;
+        {
+            // Initialize Firestore
+            db = FirebaseFirestore.DefaultInstance;
 
-        // Initialize Firebase Storage
-        storage = FirebaseStorage.DefaultInstance;
-        storageRef = storage.GetReferenceFromUrl("gs://netflixcyoa.firebasestorage.app");
+            // Initialize Firebase Storage
+            storage = FirebaseStorage.DefaultInstance;
+            storageRef = storage.GetReferenceFromUrl("gs://netflixcyoa.firebasestorage.app");
 
-        // Listen for the latest ID
-        ListenForMostRecentPythonTask();
-    }
-
+            // Listen for the latest ID
+            ListenForMostRecentPythonTask();
+        }
 
         private void FetchJsonFromStorage(string id)
         {
@@ -58,8 +70,6 @@ namespace FirebaseNetworkKit
             });
         }
 
-
-
         private void ListenForMostRecentPythonTask()
         {
             CollectionReference pythonCollection = db.Collection("services").Document("tasks").Collection("python");
@@ -86,12 +96,32 @@ namespace FirebaseNetworkKit
                 }
             });
         }
-        
 
-        private void ProcessJsonContent(string jsonContent)
+        public void UploadNewNodeToFirestore(string nodeId, int choiceIndex, string choiceContent)
         {
-            Debug.Log("Processing JSON content...");
-            // Add custom logic to process the JSON content here
+            Debug.Log($"Uploading new node to Firestore with Node ID: {nodeId}");
+            CollectionReference unityCollection = db.Collection("services").Document("tasks").Collection("unity");
+
+            // Prepare the data for the new document
+            var newNodeData = new Dictionary<string, object>
+            {
+                { "choiceId", choiceIndex }, // Convert index to 1-based
+                { "type", "choice" },
+                { "content", choiceContent }
+            };
+
+            // Add the document with the specified nodeId
+            unityCollection.Document(nodeId).SetAsync(newNodeData).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log($"New document created in Firestore for Node ID {nodeId}.");
+                }
+                else
+                {
+                    Debug.LogError($"Failed to create document for Node ID {nodeId}: {task.Exception}");
+                }
+            });
         }
     }
 }
