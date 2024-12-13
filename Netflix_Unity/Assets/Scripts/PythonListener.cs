@@ -42,9 +42,11 @@ namespace FirebaseNetworkKit
             ListenForMostRecentPythonTask();
         }
 
-        private void FetchJsonFromStorage(string id)
+        public void FetchJsonFromStorage(string selection)
         {
-            string jsonFileName = $"{id}.json"; // File named <id>.json
+            Debug.Log($"Fetching JSON for selected story: {selection}");
+
+            string jsonFileName = $"{selection.Replace(" ", "_").ToLower()}.json"; // File named after the selection
             StorageReference jsonFileRef = storageRef.Child(jsonFileName);
 
             string localPath = Path.Combine(Application.persistentDataPath, jsonFileName);
@@ -62,6 +64,9 @@ namespace FirebaseNetworkKit
 
                     // Send JSON content to StoryLoader
                     StoryLoader.Instance.LoadStoryData(jsonContent);
+
+                    // Notify NodeManager to start the story
+                    FindObjectOfType<NodeManager>().StartStoryFromSelection();
                 }
                 else
                 {
@@ -69,6 +74,7 @@ namespace FirebaseNetworkKit
                 }
             });
         }
+
 
         private void ListenForMostRecentPythonTask()
         {

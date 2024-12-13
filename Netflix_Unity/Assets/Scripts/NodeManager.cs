@@ -36,6 +36,12 @@ public class NodeManager : MonoBehaviour
         Invoke(nameof(LoadInitialNode), 3f); // Delay to ensure StoryData is loaded
     }
 
+    public void StartStoryFromSelection()
+    {
+        Debug.Log("Starting story from initial selection...");
+        LoadNode("1"); // Assuming the first node ID is "1"
+    }
+
     private void LoadInitialNode()
     {
         if (StoryLoader.Instance != null && StoryLoader.Instance.StoryData != null)
