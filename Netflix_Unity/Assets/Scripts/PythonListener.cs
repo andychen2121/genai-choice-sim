@@ -14,20 +14,51 @@ namespace FirebaseNetworkKit
         private FirebaseStorage storage;
         private StorageReference storageRef;
 
+        private StoryLoader storyLoader;
+
         void Start()
+    {
+        // Initialize Firestore
+        db = FirebaseFirestore.DefaultInstance;
+
+        // Initialize Firebase Storage
+        storage = FirebaseStorage.DefaultInstance;
+        storageRef = storage.GetReferenceFromUrl("gs://netflixcyoa.firebasestorage.app");
+
+        // Listen for the latest ID
+        ListenForMostRecentPythonTask();
+    }
+
+
+        private void FetchJsonFromStorage(string id)
         {
-            Debug.Log("Initializing Python Listener...");
+            string jsonFileName = $"{id}.json"; // File named <id>.json
+            StorageReference jsonFileRef = storageRef.Child(jsonFileName);
 
-            // Initialize Firestore
-            db = FirebaseFirestore.DefaultInstance;
+            string localPath = Path.Combine(Application.persistentDataPath, jsonFileName);
+            jsonFileRef.GetFileAsync(localPath).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log($"JSON file downloaded to: {localPath}");
 
-            // Initialize Firebase Storage
-            storage = FirebaseStorage.DefaultInstance;
-            storageRef = storage.GetReferenceFromUrl("gs://netflixcyoa.firebasestorage.app");
+                    // Read the JSON file content
+                    string jsonContent = File.ReadAllText(localPath);
 
-            // Set up listener for the python collection
-            ListenForMostRecentPythonTask();
+                    // Debug log the contents of the JSON file
+                    Debug.Log($"JSON Content: {jsonContent}");
+
+                    // Send JSON content to StoryLoader
+                    StoryLoader.Instance.LoadStoryData(jsonContent);
+                }
+                else
+                {
+                    Debug.LogError($"Failed to download JSON file: {task.Exception}");
+                }
+            });
         }
+
+
 
         private void ListenForMostRecentPythonTask()
         {
@@ -55,32 +86,7 @@ namespace FirebaseNetworkKit
                 }
             });
         }
-
-        private void FetchJsonFromStorage(string id)
-        {
-            string jsonFileName = $"{id}.json"; // Assumes the JSON file name matches the ID
-            StorageReference jsonFileRef = storageRef.Child(jsonFileName);
-
-            string localPath = Path.Combine(Application.persistentDataPath, jsonFileName);
-            jsonFileRef.GetFileAsync(localPath).ContinueWithOnMainThread(task =>
-            {
-                if (task.IsCompletedSuccessfully)
-                {
-                    Debug.Log($"JSON file downloaded to: {localPath}");
-
-                    // Read and log the JSON file content
-                    string jsonContent = File.ReadAllText(localPath);
-                    Debug.Log($"JSON Content: {jsonContent}");
-
-                    // Optionally process the JSON content
-                    ProcessJsonContent(jsonContent);
-                }
-                else
-                {
-                    Debug.LogError($"Failed to download JSON file: {task.Exception}");
-                }
-            });
-        }
+        
 
         private void ProcessJsonContent(string jsonContent)
         {

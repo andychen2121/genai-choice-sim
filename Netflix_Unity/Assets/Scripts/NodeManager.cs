@@ -1,86 +1,85 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 public class NodeManager : MonoBehaviour
 {
     [System.Serializable]
     public class StoryNode
     {
-        public string nodeText;
-        public string[] choices;
-        public string backgroundImage;
-        public int[] nextNodeIndices;
+        public string NodeText;
+        public string[] Choices;
+        public string CurrentNodeId;
     }
 
-    public TextMeshProUGUI plotText;
-    public Button[] choiceButtons;
-    public TextMeshProUGUI[] choiceTexts;
-    public Image backgroundImageUI;
+    public StoryNode CurrentStoryNode;
 
-    private StoryNode[] storyNodes;
-    private int currentNodeIndex = 0;
+    public TextMeshProUGUI PlotText; // Story text display
+    public Button[] ChoiceButtons;  // Buttons for choices
+    public TextMeshProUGUI[] ChoiceTexts; // Text on choice buttons
 
-    public void InitializeStoryNodes(StoryNode[] loadedNodes)
+    public void LoadNode(string nodeId)
     {
-        if (loadedNodes == null || loadedNodes.Length == 0)
+        if (!StoryLoader.Instance.StoryData.StoryNodes.TryGetValue(nodeId, out var node))
         {
-            Debug.LogError("Loaded story nodes array is empty or null.");
+            Debug.LogError($"Story node with ID {nodeId} not found!");
             return;
         }
 
-        storyNodes = loadedNodes;
-        currentNodeIndex = 0;
-        LoadNode(currentNodeIndex);
+        Debug.Log($"Loading Node ID: {nodeId}");
+
+        CurrentStoryNode = new StoryNode
+        {
+            NodeText = node.StoryContinuation,
+            Choices = new string[node.Choices.Count],
+            CurrentNodeId = nodeId
+        };
+
+        for (int i = 0; i < node.Choices.Count; i++)
+        {
+            CurrentStoryNode.Choices[i] = node.Choices[i].Action;
+        }
+
+        UpdateUI();
     }
 
-    private void LoadNode(int nodeIndex)
+    private void UpdateUI()
     {
-        if (nodeIndex < 0 || nodeIndex >= storyNodes.Length)
-        {
-            Debug.LogError($"Invalid node index: {nodeIndex}.");
-            return;
-        }
+        if (CurrentStoryNode == null) return;
 
-        StoryNode currentNode = storyNodes[nodeIndex];
-        plotText.text = currentNode.nodeText;
+        Debug.Log($"Updating UI for Node ID: {CurrentStoryNode.CurrentNodeId}");
 
-        if (backgroundImageUI != null)
+        PlotText.text = CurrentStoryNode.NodeText;
+
+        for (int i = 0; i < ChoiceButtons.Length; i++)
         {
-            Sprite newBackground = Resources.Load<Sprite>(currentNode.backgroundImage);
-            if (newBackground != null)
+            if (i < CurrentStoryNode.Choices.Length)
             {
-                backgroundImageUI.sprite = newBackground;
-            }
-        }
+                ChoiceButtons[i].gameObject.SetActive(true);
+                ChoiceTexts[i].text = CurrentStoryNode.Choices[i];
 
-        for (int i = 0; i < choiceTexts.Length; i++)
-        {
-            if (i < currentNode.choices.Length)
-            {
-                choiceButtons[i].gameObject.SetActive(true);
-                choiceTexts[i].text = currentNode.choices[i];
-                int choiceIndex = i;
-                choiceButtons[i].onClick.RemoveAllListeners();
-                choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choiceIndex));
+                int choiceIndex = i; // Local variable for closure
+                ChoiceButtons[i].onClick.RemoveAllListeners();
+                ChoiceButtons[i].onClick.AddListener(() => OnChoiceSelected(choiceIndex));
             }
             else
             {
-                choiceButtons[i].gameObject.SetActive(false);
-                choiceTexts[i].text = "";
+                ChoiceButtons[i].gameObject.SetActive(false);
             }
         }
     }
 
     private void OnChoiceSelected(int choiceIndex)
     {
-        if (choiceIndex < 0 || choiceIndex >= storyNodes[currentNodeIndex].nextNodeIndices.Length)
+        if (choiceIndex < 0 || choiceIndex >= CurrentStoryNode.Choices.Length)
         {
-            Debug.LogError($"Invalid choice index: {choiceIndex}.");
+            Debug.LogError($"Invalid choice index: {choiceIndex}");
             return;
         }
 
-        currentNodeIndex = storyNodes[currentNodeIndex].nextNodeIndices[choiceIndex];
-        LoadNode(currentNodeIndex);
+        string nextNodeId = CurrentStoryNode.CurrentNodeId + (choiceIndex + 1).ToString();
+        Debug.Log($"Next Node ID: {nextNodeId}");
+
+        LoadNode(nextNodeId);
     }
 }
