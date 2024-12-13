@@ -31,6 +31,7 @@ class Coordinator:
     # dynamically generate as needed
     # TODO: image generation should dynamically occur in this method; we can store image paths in JSONs, similar to text organization
     def continue_story(self, choice_id: str, current_label: str = None):
+        print(f"Current Node: {self.current_label}")
         # allows easy testing
         if current_label:
             self.current_label = current_label

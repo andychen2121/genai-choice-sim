@@ -42,38 +42,165 @@ namespace FirebaseNetworkKit
             ListenForMostRecentPythonTask();
         }
 
-        public void FetchJsonFromStorage(string selection)
+       public void FetchJsonFromStorage(string selection)
+{
+    Debug.Log($"Fetching JSON for selected story: {selection}");
+
+    // Check if the selection is of type "json" before fetching
+    CollectionReference pythonCollection = db.Collection("services").Document("tasks").Collection("python");
+
+    pythonCollection.Document(selection).GetSnapshotAsync().ContinueWithOnMainThread(task =>
+    {
+        if (task.IsCompletedSuccessfully)
         {
-            Debug.Log($"Fetching JSON for selected story: {selection}");
+            var documentSnapshot = task.Result;
 
-            string jsonFileName = $"{selection.Replace(" ", "_").ToLower()}.json"; // File named after the selection
-            StorageReference jsonFileRef = storageRef.Child(jsonFileName);
+            if (documentSnapshot.Exists && documentSnapshot.GetValue<string>("type") == "json")
+            {
+                string jsonFileName = $"{selection}.json";
+                Debug.Log($"Generated JSON file name: {jsonFileName}");
+                StorageReference jsonFileRef = storageRef.Child(jsonFileName);
 
-            string localPath = Path.Combine(Application.persistentDataPath, jsonFileName);
-            jsonFileRef.GetFileAsync(localPath).ContinueWithOnMainThread(task =>
+                string localPath = Path.Combine(Application.persistentDataPath, jsonFileName);
+                jsonFileRef.GetFileAsync(localPath).ContinueWithOnMainThread(fileTask =>
+                {
+                    if (fileTask.IsCompletedSuccessfully)
+                    {
+                        Debug.Log($"JSON file downloaded to: {localPath}");
+
+                        // Read the JSON file content
+                        string jsonContent = File.ReadAllText(localPath);
+
+                        // Debug log the contents of the JSON file
+                        Debug.Log($"JSON Content: {jsonContent}");
+
+                        // Send JSON content to StoryLoader
+                        StoryLoader.Instance.LoadStoryData(jsonContent);
+
+                        // Notify NodeManager to start the story
+                        FindObjectOfType<NodeManager>().StartStoryFromSelection();
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to download JSON file: {fileTask.Exception}");
+                    }
+                });
+            }
+            else
+            {
+                Debug.LogWarning($"Document {selection} is not of type 'json'. Skipping file load.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Failed to fetch document {selection} metadata: {task.Exception}");
+        }
+    });
+}
+
+        
+       
+public void UploadInvalidChoiceToUnityCollection(string nodeId, int choiceIndex, string choiceContent)
+{
+    Debug.Log($"Uploading invalid choice data to Firestore (unity collection). Node ID: {nodeId}, Choice Index: {choiceIndex}, Content: {choiceContent}");
+
+    // Reference the unity collection
+    CollectionReference unityCollection = db.Collection("services").Document("tasks").Collection("unity");
+
+    // Prepare the data for the new document
+    var invalidChoiceData = new Dictionary<string, object>
+    {
+        { "type", "choice" },
+        { "choiceId", nodeId },
+        { "content", choiceContent }
+    };
+
+    // Generate a UUID for the new document name
+    string documentName = System.Guid.NewGuid().ToString();
+
+    // Add the document to Firestore
+    unityCollection.Document(documentName).SetAsync(invalidChoiceData).ContinueWithOnMainThread(task =>
+    {
+        if (task.IsCompletedSuccessfully)
+        {
+            Debug.Log($"Invalid choice data uploaded to Firestore successfully. Document Name: {documentName}");
+        }
+        else
+        {
+            Debug.LogError($"Failed to upload invalid choice data to Firestore: {task.Exception}");
+        }
+    });
+}
+
+        
+        public void UploadChoiceAndLoadJson(string choiceId, string choiceContent)
+        {
+            Debug.Log($"Uploading selected choice to Firestore and loading its JSON. Choice ID: {choiceId}, Content: {choiceContent}");
+    
+            // Reference the Python collection
+            CollectionReference pythonCollection = db.Collection("services").Document("tasks").Collection("python");
+
+            // Prepare the data for the new document
+            var choiceData = new Dictionary<string, object>
+            {
+                { "id", choiceId },
+                { "type", "choice" },
+                { "content", choiceContent }
+            };
+
+            // Generate a UUID for the new document name
+            string documentName = System.Guid.NewGuid().ToString();
+
+            // Add the document to Firestore
+            pythonCollection.Document(documentName).SetAsync(choiceData).ContinueWithOnMainThread(task =>
             {
                 if (task.IsCompletedSuccessfully)
                 {
-                    Debug.Log($"JSON file downloaded to: {localPath}");
+                    Debug.Log($"Choice uploaded to Firestore successfully. Document Name: {documentName}");
 
-                    // Read the JSON file content
-                    string jsonContent = File.ReadAllText(localPath);
-
-                    // Debug log the contents of the JSON file
-                    Debug.Log($"JSON Content: {jsonContent}");
-
-                    // Send JSON content to StoryLoader
-                    StoryLoader.Instance.LoadStoryData(jsonContent);
-
-                    // Notify NodeManager to start the story
-                    FindObjectOfType<NodeManager>().StartStoryFromSelection();
+                    // After upload, fetch the JSON file for the choice content
+                    FetchJsonFromStorage(choiceContent);
                 }
                 else
                 {
-                    Debug.LogError($"Failed to download JSON file: {task.Exception}");
+                    Debug.LogError($"Failed to upload choice to Firestore: {task.Exception}");
                 }
             });
         }
+
+        
+        public void UploadChoiceToFirestore(string choiceId, string choiceContent)
+        {
+            Debug.Log($"Uploading selected choice to Firestore. Choice ID: {choiceId}, Content: {choiceContent}");
+    
+            // Reference the Python collection
+            CollectionReference pythonCollection = db.Collection("services").Document("tasks").Collection("python");
+
+            // Prepare the data for the new document
+            var choiceData = new Dictionary<string, object>
+            {
+                { "id", choiceId },
+                { "type", "choice" },
+                { "content", choiceContent }
+            };
+
+            // Generate a UUID for the new document name
+            string documentName = System.Guid.NewGuid().ToString();
+
+            // Add the document to Firestore
+            pythonCollection.Document(documentName).SetAsync(choiceData).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompletedSuccessfully)
+                {
+                    Debug.Log($"Choice uploaded to Firestore successfully. Document Name: {documentName}");
+                }
+                else
+                {
+                    Debug.LogError($"Failed to upload choice to Firestore: {task.Exception}");
+                }
+            });
+        }
+
 
 
         private void ListenForMostRecentPythonTask()
@@ -90,10 +217,19 @@ namespace FirebaseNetworkKit
                     if (mostRecentDocument.Exists)
                     {
                         string id = mostRecentDocument.GetValue<string>("id");
-                        Debug.Log($"Most recent ID in python collection: {id}");
+                        string type = mostRecentDocument.GetValue<string>("type");
 
-                        // Fetch the corresponding JSON file from Firebase Storage
-                        FetchJsonFromStorage(id);
+                        Debug.Log($"Most recent ID in python collection: {id}, Type: {type}");
+
+                        if (type == "json")
+                        {
+                            // Fetch the corresponding JSON file from Firebase Storage
+                            FetchJsonFromStorage(id);
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Document with ID {id} is not of type 'json'. Skipping file load.");
+                        }
                     }
                 }
                 else
@@ -102,6 +238,7 @@ namespace FirebaseNetworkKit
                 }
             });
         }
+
 
         public void UploadNewNodeToFirestore(string nodeId, int choiceIndex, string choiceContent)
         {
@@ -130,4 +267,6 @@ namespace FirebaseNetworkKit
             });
         }
     }
+    
+    
 }

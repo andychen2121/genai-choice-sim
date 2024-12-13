@@ -19,11 +19,18 @@ public class NodeManager : MonoBehaviour
     public TextMeshProUGUI PlotText; // Story text display
     public Button[] ChoiceButtons;  // Buttons for choices
     public TextMeshProUGUI[] ChoiceTexts; // Text on choice buttons
+    public GameObject StoryUI; // Reference to the StoryUI GameObject
 
     private PythonListener pythonListener; // Reference to PythonListener
 
     private void Start()
     {
+        // Disable StoryUI at the start
+        if (StoryUI != null)
+        {
+            StoryUI.SetActive(false);
+        }
+
         // Find the PythonListener GameObject
         pythonListener = GameObject.FindObjectOfType<PythonListener>();
 
@@ -31,29 +38,22 @@ public class NodeManager : MonoBehaviour
         {
             Debug.LogError("PythonListener GameObject not found in the scene.");
         }
-
-        // Ensure initial node is loaded when StoryData is available
-        Invoke(nameof(LoadInitialNode), 3f); // Delay to ensure StoryData is loaded
     }
 
     public void StartStoryFromSelection()
     {
         Debug.Log("Starting story from initial selection...");
+
+        // Enable StoryUI when starting the story
+        if (StoryUI != null)
+        {
+            StoryUI.SetActive(true);
+        }
+
         LoadNode("1"); // Assuming the first node ID is "1"
     }
-
-    private void LoadInitialNode()
-    {
-        if (StoryLoader.Instance != null && StoryLoader.Instance.StoryData != null)
-        {
-            Debug.Log("Loading initial node...");
-            LoadNode("1"); // Replace "1" with your desired starting node ID
-        }
-        else
-        {
-            Debug.LogError("StoryLoader or StoryData is not initialized yet.");
-        }
-    }
+    
+    
 
     public void LoadNode(string nodeId)
     {
@@ -98,7 +98,6 @@ public class NodeManager : MonoBehaviour
             {
                 ChoiceButtons[i].gameObject.SetActive(true);
                 ChoiceTexts[i].text = CurrentStoryNode.Choices[i];
-                Debug.Log($"Button {i}: {ChoiceTexts[i].text}");
 
                 int choiceIndex = i; // Local variable for closure
                 ChoiceButtons[i].onClick.RemoveAllListeners();
@@ -119,29 +118,32 @@ public class NodeManager : MonoBehaviour
             return;
         }
 
+        // Determine the next node ID
         string nextNodeId = CurrentStoryNode.CurrentNodeId + (choiceIndex + 1).ToString();
-        Debug.Log($"Next Node ID: {nextNodeId}");
+        string choiceContent = CurrentStoryNode.Choices[choiceIndex];
+        Debug.Log($"Next Node ID: {nextNodeId}, Choice Content: {choiceContent}");
 
         // Check if the next node exists
         if (!StoryLoader.Instance.StoryData.StoryNodes.ContainsKey(nextNodeId))
         {
-            Debug.LogWarning($"Node ID {nextNodeId} does not exist. Creating a new document in Firestore.");
+            Debug.LogWarning($"Node ID {nextNodeId} does not exist. Uploading invalid choice data to Firestore.");
 
+            // Find the PythonListener and call the upload method
+            PythonListener pythonListener = FindObjectOfType<PythonListener>();
             if (pythonListener != null)
             {
-                string choiceContent = CurrentStoryNode.Choices[choiceIndex];
-                string uuid = Guid.NewGuid().ToString();
-                pythonListener.UploadNewNodeToFirestore(uuid, int.Parse(nextNodeId), choiceContent);
+                pythonListener.UploadInvalidChoiceToUnityCollection(nextNodeId, choiceIndex, choiceContent);
             }
             else
             {
-                Debug.LogError("PythonListener reference is null. Cannot upload to Firestore.");
+                Debug.LogError("PythonListener not found. Cannot upload invalid choice data.");
             }
-
             return;
         }
 
         // Load the next node if it exists
         LoadNode(nextNodeId);
     }
+
+
 }

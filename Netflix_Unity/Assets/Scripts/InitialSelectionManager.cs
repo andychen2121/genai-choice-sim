@@ -41,8 +41,8 @@ public class InitialSelectionManager : MonoBehaviour
         // Create a document with the selection
         var documentData = new Dictionary<string, object>
         {
-            { "type", "initialStory" },
-            { "content", selection }
+            { "content", selection } ,
+            { "type", "initialStory" }
         };
 
         // Generate a unique ID for the document
