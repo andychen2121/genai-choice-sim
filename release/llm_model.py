@@ -5,7 +5,7 @@ from together import Together
 MAX_RETRIES = 10
 
 wiki_wiki = wikipediaapi.Wikipedia('MyProjectName (merlin@example.com)', 'en')
-client = Together(api_key='0256f61cf32560dba2fb9c36573f46b473dbd1f2f0d95a731eeaf01b458e7bed')
+client = Together(api_key='')
 all_jsons = {}
 
 def get_plot(title):
