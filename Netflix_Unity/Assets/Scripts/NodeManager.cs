@@ -18,15 +18,36 @@ public class NodeManager : MonoBehaviour
     public Button[] ChoiceButtons;  // Buttons for choices
     public TextMeshProUGUI[] ChoiceTexts; // Text on choice buttons
 
+    private bool isInitialized = false;
+
+    private void Start()
+    {
+        // Ensure initial node is loaded when StoryData is available
+        Invoke(nameof(LoadInitialNode), 3f); // Delay to ensure StoryData is loaded
+    }
+
+    private void LoadInitialNode()
+    {
+        if (StoryLoader.Instance != null && StoryLoader.Instance.StoryData != null)
+        {
+            Debug.Log("Loading initial node...");
+            LoadNode("1"); // Replace "1" with your desired starting node ID
+            isInitialized = true;
+        }
+        else
+        {
+            Debug.LogError("StoryLoader or StoryData is not initialized yet.");
+        }
+    }
+
     public void LoadNode(string nodeId)
     {
+        Debug.Log($"Loading Node ID: {nodeId}");
         if (!StoryLoader.Instance.StoryData.StoryNodes.TryGetValue(nodeId, out var node))
         {
             Debug.LogError($"Story node with ID {nodeId} not found!");
             return;
         }
-
-        Debug.Log($"Loading Node ID: {nodeId}");
 
         CurrentStoryNode = new StoryNode
         {
@@ -45,9 +66,14 @@ public class NodeManager : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (CurrentStoryNode == null) return;
+        if (CurrentStoryNode == null)
+        {
+            Debug.LogError("CurrentStoryNode is null. UI cannot be updated.");
+            return;
+        }
 
-        Debug.Log($"Updating UI for Node ID: {CurrentStoryNode.CurrentNodeId}");
+        Debug.Log($"Updating UI with Node Text: {CurrentStoryNode.NodeText}");
+        Debug.Log($"Choices Count: {CurrentStoryNode.Choices.Length}");
 
         PlotText.text = CurrentStoryNode.NodeText;
 
@@ -57,6 +83,7 @@ public class NodeManager : MonoBehaviour
             {
                 ChoiceButtons[i].gameObject.SetActive(true);
                 ChoiceTexts[i].text = CurrentStoryNode.Choices[i];
+                Debug.Log($"Button {i}: {ChoiceTexts[i].text}");
 
                 int choiceIndex = i; // Local variable for closure
                 ChoiceButtons[i].onClick.RemoveAllListeners();
@@ -77,9 +104,11 @@ public class NodeManager : MonoBehaviour
             return;
         }
 
+        // Calculate the next node ID by appending the choice index to the current node ID
         string nextNodeId = CurrentStoryNode.CurrentNodeId + (choiceIndex + 1).ToString();
-        Debug.Log($"Next Node ID: {nextNodeId}");
 
+        Debug.Log($"Next Node ID: {nextNodeId}");
         LoadNode(nextNodeId);
     }
+
 }

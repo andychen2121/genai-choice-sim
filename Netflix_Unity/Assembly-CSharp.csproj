@@ -45,15 +45,50 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeA.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/EnvMapAnimator.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01_UGUI.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SimpleScript.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark04.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ChatController.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_DigitValidator.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_FrameRateCounter.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshSpawner.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark02.cs" />
      <Compile Include="Assets/Scripts/NodeManager.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/CameraController.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_ExampleScript_01.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMPro_InstructionOverlay.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeB.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/DropdownSample.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexColorCycler.cs" />
      <Compile Include="Assets/Scripts/PythonListener.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ObjectSpin.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_PhoneNumberValidator.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexJitter.cs" />
      <Compile Include="Assets/Scr.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextConsoleSimulator.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TeleType.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventCheck.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_UiFrameRateCounter.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexZoom.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_B.cs" />
      <Compile Include="Assets/Scripts/StoryData.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SkewTextExample.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
      <Compile Include="Assets/Scripts/StoryLoader.cs" />
+     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextInfoDebugTool.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/12.1.0" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Sprites" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
      <Folder Include="Assets/TextMesh Pro/Sprites" />
      <Folder Include="Assets/TextMesh Pro/Resources/Sprite Assets" />
@@ -62,6 +97,8 @@
      <Folder Include="Assets/Firebase" />
      <Folder Include="Assets/Editor Default Resources/Firebase" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-firestore-unity" />
+     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Oswald-Bold - OFL.txt" />
+     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Anton OFL.txt" />
      <Folder Include="Assets/TextMesh Pro/Resources/Fonts &amp; Materials" />
      <Folder Include="Assets/Firebase/m2repository/com/google" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
@@ -75,27 +112,34 @@
      <Folder Include="Assets/TextMesh Pro" />
      <Folder Include="Assets/ExternalDependencyManager" />
      <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/maven-metadata.xml" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-firestore-unity/12.1.0" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" />
      <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Materials" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF.shader" />
      <None Include="Assets/StreamingAssets/google-services-desktop.json" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts" />
      <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/maven-metadata.xml" />
      <Folder Include="Assets/StreamingAssets" />
      <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
      <Folder Include="Assets/TextMesh Pro/Shaders" />
      <Folder Include="Assets/Scripts" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Sprite Assets" />
      <Folder Include="Assets/TextMesh Pro/Resources/Style Sheets" />
      <Folder Include="Assets/TextMesh Pro/Fonts" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity/12.1.0" />
      <Folder Include="Assets/Firebase/m2repository" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/12.1.0" />
      <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Prefabs" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Scenes" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity" />
      <Folder Include="Assets/Firebase/m2repository/com" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
@@ -105,13 +149,18 @@
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" />
      <Folder Include="Assets/Editor Default Resources" />
      <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Textures" />
      <Folder Include="Assets/TextMesh Pro/Documentation" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials" />
      <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity" />
+     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Color Gradient Presets" />
      <None Include="Assets/TextMesh Pro/Sprites/EmojiOne.json" />
      <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity/maven-metadata.xml" />
      <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
      <Folder Include="Assets/Firebase/Plugins/x86_64" />
+     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Bangers - OFL.txt" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
@@ -364,32 +413,32 @@
      <Reference Include="Unity.Collections.LowLevel.ILSupport">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-     </Reference>
      <Reference Include="Firebase.App">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
      </Reference>
+     <Reference Include="Firebase.Firestore">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Firestore.dll</HintPath>
+     </Reference>
      <Reference Include="Firebase.TaskExtension">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
+     </Reference>
+     <Reference Include="Firebase.Auth">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Firebase.Platform">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
      </Reference>
      <Reference Include="Firebase.Storage">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Storage.dll</HintPath>
      </Reference>
      <Reference Include="Google.MiniJson">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
-     </Reference>
-     <Reference Include="Firebase.Auth">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
-     </Reference>
-     <Reference Include="Firebase.Platform">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Platform.dll</HintPath>
-     </Reference>
-     <Reference Include="Firebase.Firestore">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Firestore.dll</HintPath>
-     </Reference>
-     <Reference Include="Newtonsoft.Json">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Android.Types">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll</HintPath>
