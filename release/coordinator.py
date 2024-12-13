@@ -30,7 +30,11 @@ class Coordinator:
     
     # dynamically generate as needed
     # TODO: image generation should dynamically occur in this method; we can store image paths in JSONs, similar to text organization
-    def continue_story(self, choice_id: str):
+    def continue_story(self, choice_id: str, current_label: str = None):
+        # allows easy testing
+        if current_label:
+            self.current_label = current_label
+
         # next node exists
         if self.current_label + choice_id in self.story_json: 
             # update parameters
@@ -75,5 +79,5 @@ if __name__ == '__main__':
     coord = Coordinator()
     # coord.initialize_storyline('League of Legends')
     coord.initialize_storyline('Dracula')
-    for i in range(7):
-        coord.continue_story("1")
+    
+    print(coord.continue_story("1", "22"))
