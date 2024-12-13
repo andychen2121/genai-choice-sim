@@ -42,6 +42,11 @@ class FirebaseCoordinator:
             doc = change.document
             data = doc.to_dict()
 
+            # Filter out previous changes
+            doc_create_time = doc.create_time  # Firestore document creation timestamp
+            if doc_create_time and doc_create_time < read_time:
+                continue
+
             # Expecting fields: type, content, choiceId
             if "type" not in data:
                 continue
@@ -58,7 +63,7 @@ class FirebaseCoordinator:
                 blob.upload_from_string(json_data, content_type='application/json')
 
                 # add to firebase
-                doc_ref = self.db.collection("services").document("tasks").collection("python").document()
+                doc_ref = self.db.collection("services").document("tasks").collection("python").document(IP)
                 doc_ref.set({'id': IP, 'type': 'json'})
 
             elif action_type == TaskType.CHOICE.value:

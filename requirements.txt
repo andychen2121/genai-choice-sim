@@ -17,10 +17,3 @@ transformers==4.37.2
 accelerate==0.25.0
 
 # JAX and JAXLIB deliberately excluded due to KeyArray compatibility issues
-
-"""
-Note: The version numbers are current as of December 2024. You may want to:
-- Use `pip install -r requirements.txt` to install
-- Check for the most recent versions at pytorch.org and huggingface.co
-- Verify compatibility with your specific CUDA version (12.x)
-"""
