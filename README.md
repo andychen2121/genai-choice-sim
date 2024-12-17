@@ -10,37 +10,55 @@ This game combines a **language model (LLM)** for generating branching narrative
 
 ---
 
-# Step 1: Set Up Firebase Credentials
-# - Obtain the Firebase service account JSON file for your project.
-# - Place the JSON file in the project directory (e.g., firebase_credentials.json).
-# - Ensure the Firebase project has Firestore and Firebase Storage enabled.
 
-# Step 2: Install Python Dependencies
-# - Make sure Python 3.8+ is installed on your system.
-pip install -r requirements.txt
+# 🔧 How to Run
 
-# Step 3: Run the Backend
-# - Start the authentication script to initialize Firebase and ensure the backend is set up.
-python auth.py
+Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adventure Game** on your system:
 
-# Step 4: Set Up Unity Frontend
-# - Open the Unity project in the `release/` folder using Unity Hub.
-# - Ensure Unity's Firebase SDK is correctly configured:
-#   1. Import the Firebase Unity SDK into the Unity project.
-#   2. Replace the default `google-services.json` (Android) or `GoogleService-Info.plist` (iOS) 
-#      with your project's configurations from the Firebase Console.
-# - Verify that the Unity project successfully connects to Firebase:
-#   - Check that Firestore and Storage integration scripts are enabled.
-#   - Confirm that placeholder assets update dynamically.
+---
 
-# Step 5: Run Unity
-# - Click Play in the Unity Editor to start the game.
-# - Watch as the game synchronizes real-time narrative and visuals using Firebase.
+1. Set Up Firebase Credentials
 
-# Step 6: Test Gameplay
-# - Interact with the game to verify:
-#   - Narrative choices update in real-time.
-#   - AI-generated visuals are correctly loaded and displayed.
+- Obtain the Firebase service account JSON file for your project.
+- Place the JSON file in the project directory (e.g., `firebase_credentials.json`).
+- Ensure the Firebase project has **Firestore** and **Firebase Storage** enabled.
+
+2. Install Python Dependencies
+
+- Make sure **Python 3.8+** is installed on your system.
+- Navigate to the project root directory and install the required dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+3. Run the Backend
+
+- Start the authentication script to initialize Firebase and ensure the backend is set up:
+
+  ```bash
+  python auth.py
+  ```
+
+- The `auth.py` script will:
+
+  - Authenticate using the Firebase credentials.
+  - Verify Firestore and Storage connectivity.
+  - Set up any required data structures in Firestore for the game.
+
+4. Set Up Unity Frontend
+
+1. Open the Unity project in the `release/` folder using **Unity Hub**.
+2. Ensure Unity's Firebase SDK is correctly configured:
+   - Import the **Firebase Unity SDK** into the Unity project.
+   - Replace the default `google-services.json` (Android) or `GoogleService-Info.plist` (iOS) with your project's configurations from the Firebase Console.
+3. Verify that the Unity project successfully connects to Firebase:
+   - Check that Firestore and Storage integration scripts are enabled.
+   - Confirm that placeholder assets update dynamically.
+
+5. Run Unity
+
+- Click **Play** in the Unity Editor to start the game.
+- Watch as the game synchronizes real-time narrative and visuals using Firebase.
 
 ---
 
