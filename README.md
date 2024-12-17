@@ -15,8 +15,6 @@ This game combines a **language model (LLM)** for generating branching narrative
 
 Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adventure Game** on your system:
 
----
-
 1. Set Up Firebase Credentials
 
 - Obtain the Firebase service account JSON file for your project.
@@ -47,13 +45,10 @@ Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adven
 
 4. Set Up Unity Frontend
 
-1. Open the Unity project in the `release/` folder using **Unity Hub**.
-2. Ensure Unity's Firebase SDK is correctly configured:
-   - Import the **Firebase Unity SDK** into the Unity project.
-   - Replace the default `google-services.json` (Android) or `GoogleService-Info.plist` (iOS) with your project's configurations from the Firebase Console.
-3. Verify that the Unity project successfully connects to Firebase:
-   - Check that Firestore and Storage integration scripts are enabled.
-   - Confirm that placeholder assets update dynamically.
+- Open the Unity project in the `Netflix_Unity/` folder using **Unity Hub**.
+- Verify that the Unity project successfully connects to Firebase:
+     - Check that Firestore and Storage integration scripts are enabled.
+     - Confirm that placeholder assets update dynamically.
 
 5. Run Unity
 
