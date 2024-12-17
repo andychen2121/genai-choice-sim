@@ -104,32 +104,6 @@ Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adven
 
 ---
 
-## 📂 Folder Structure
-
-- **`data/`**: Organizes game data (e.g., story seeds, generated narratives).
-- **`release/`**: Contains production-ready assets:
-  - Python scripts for LLM and image generation.
-  - Unity assets for frontend integration.
-- **`sandbox/`**: Proof-of-concept prototypes for LLM and image model fine-tuning.
-- **`.gitignore`**: Ensures sensitive files (e.g., Firebase credentials) are excluded.
-- **`requirements.txt`**: Python dependencies for the backend.
-
----
-
-## 🚧 Development Workflow
-
-1. **Static Story Generation**:
-   - Generates the initial narrative tree with multiple layers for immediate exploration.
-   - Example: Root node → 4 choices → 16 sub-nodes.
-2. **Dynamic Real-Time Expansion**:
-   - New nodes are created dynamically as players progress.
-   - Ensures seamless branching with low latency.
-
-3. **Real-Time Synchronization**:
-   - Firebase ensures that both narrative and visuals update instantly in Unity.
-
----
-
 ## 🔮 Future Improvements
 
 - **Enhanced Image Generation**:
