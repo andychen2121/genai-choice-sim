@@ -11,12 +11,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{ca1e8b9b-e77f-9062-b1e9-b445b0e459c5}</ProjectGuid>
+    <RootNamespace>OpenAI.Samples.Chat</RootNamespace>
+    <ProjectGuid>{00a729e5-0e41-a979-2ecb-a65d45735da5}</ProjectGuid>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>OpenAI.Samples.Chat</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -25,7 +25,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>Temp\Bin\Debug\Assembly-CSharp\</OutputPath>
+    <OutputPath>Temp\Bin\Debug\OpenAI.Samples.Chat\</OutputPath>
     <DefineConstants>UNITY_2022_3_13;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_2022_3_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_NATIVE_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_OSX;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_SPATIALTRACKING;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,131 +45,10 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventHandler.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeA.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/EnvMapAnimator.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_A.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01_UGUI.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SimpleScript.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark04.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ChatController.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_DigitValidator.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_FrameRateCounter.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark01.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshSpawner.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark02.cs" />
-     <Compile Include="Assets/CoroutineHandler.cs" />
-     <Compile Include="Assets/Scripts/NodeManager.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/CameraController.cs" />
-     <Compile Include="Assets/Scripts/InitialSelectionManager.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/Benchmark03.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_ExampleScript_01.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMPro_InstructionOverlay.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexShakeB.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/DropdownSample.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexColorCycler.cs" />
-     <Compile Include="Assets/Scripts/PythonListener.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ObjectSpin.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_PhoneNumberValidator.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexJitter.cs" />
-     <Compile Include="Assets/Scr.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextConsoleSimulator.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TeleType.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextEventCheck.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_UiFrameRateCounter.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/VertexZoom.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextSelector_B.cs" />
-     <Compile Include="Assets/Scripts/StoryData.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/SkewTextExample.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/WarpTextExample.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TextMeshProFloatingText.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/ShaderPropAnimator.cs" />
-     <Compile Include="Assets/Scripts/StoryLoader.cs" />
-     <Compile Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextInfoDebugTool.cs" />
-     <Folder Include="Assets" />
-     <Folder Include="Assets/Firebase/Plugins" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Sprites" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader" />
-     <Folder Include="Assets/TextMesh Pro/Sprites" />
-     <Folder Include="Assets/Samples/OpenAI/8.4.4" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Sprite Assets" />
-     <Folder Include="Assets/Samples/OpenAI" />
-     <Folder Include="Assets/Settings" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader" />
-     <Folder Include="Assets/Firebase" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-database-unity" />
-     <Folder Include="Assets/Editor Default Resources/Firebase" />
-     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Oswald-Bold - OFL.txt" />
-     <Folder Include="Assets/Firebase/m2repository/com/google" />
-     <None Include="Assets/StreamingAssets/google-services-desktop.json" />
-     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Anton OFL.txt" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Fonts &amp; Materials" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader" />
-     <Folder Include="Assets/TextMesh Pro/Resources" />
-     <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-firestore-unity/maven-metadata.xml" />
-     <Folder Include="Assets/Scenes" />
-     <Folder Include="Assets/Firebase/m2repository" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-database-unity/12.1.0" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader" />
-     <Folder Include="Assets/Settings/Scenes" />
-     <Folder Include="Assets/TextMesh Pro" />
-     <Folder Include="Assets/ExternalDependencyManager" />
-     <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/maven-metadata.xml" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase" />
-     <Folder Include="Assets/Samples" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader" />
-     <None Include="Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Materials" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF.shader" />
-     <Folder Include="Assets/Firebase/m2repository/com" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/12.1.0" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity/12.1.0" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-app-unity/12.1.0" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Scripts" />
-     <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity/maven-metadata.xml" />
-     <Folder Include="Assets/StreamingAssets" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc" />
-     <Folder Include="Assets/TextMesh Pro/Shaders" />
-     <Folder Include="Assets/Scripts" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Sprite Assets" />
-     <Folder Include="Assets/TextMesh Pro/Resources/Style Sheets" />
-     <Folder Include="Assets/TextMesh Pro/Fonts" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-firestore-unity/12.1.0" />
-     <None Include="Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-auth-unity" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Prefabs" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Scenes" />
-     <Folder Include="Assets/Firebase/Plugins/x86_64" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader" />
-     <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-database-unity/maven-metadata.xml" />
-     <None Include="Assets/StreamingAssets/google-services.json" />
-     <Folder Include="Assets/Firebase/Plugins/iOS" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader" />
-     <Folder Include="Assets/Editor Default Resources" />
-     <None Include="Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Textures" />
-     <Folder Include="Assets/TextMesh Pro/Documentation" />
-     <Folder Include="Assets/Resources" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras" />
-     <Folder Include="Assets/Firebase/m2repository/com/google/firebase/firebase-firestore-unity" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials" />
-     <Folder Include="Assets/TextMesh Pro/Examples &amp; Extras/Resources/Color Gradient Presets" />
-     <None Include="Assets/TextMesh Pro/Sprites/EmojiOne.json" />
-     <None Include="Assets/Firebase/m2repository/com/google/firebase/firebase-storage-unity/maven-metadata.xml" />
-     <None Include="Assets/TextMesh Pro/Shaders/TMP_Sprite.shader" />
-     <None Include="Assets/TextMesh Pro/Examples &amp; Extras/Fonts/Bangers - OFL.txt" />
+     <Compile Include="Assets/Samples/OpenAI/8.4.4/Chat/AssemblyInfo.cs" />
+     <Compile Include="Assets/Samples/OpenAI/8.4.4/Chat/ChatBehaviour.cs" />
+     <None Include="Assets/Samples/OpenAI/8.4.4/Chat/OpenAI.Samples.Chat.asmdef" />
+     <Folder Include="Assets/Samples/OpenAI/8.4.4/Chat" />
      <Reference Include="UnityEngine">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
      </Reference>
@@ -419,32 +298,71 @@
      <Reference Include="UnityEditor.UnityConnectModule">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
      </Reference>
+     <Reference Include="UnityEditor.Graphs">
+     <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.OSXStandalone.Extensions">
+     <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.Android.Extensions">
+     <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.YamlDotNet">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Dependencies/YamlDotNet/Unity.VisualScripting.YamlDotNet.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.Collections.LowLevel.ILSupport">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collections@1.2.4/Unity.Collections.LowLevel.ILSupport/Unity.Collections.LowLevel.ILSupport.dll</HintPath>
      </Reference>
      <Reference Include="nunit.framework">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.ext.nunit@2.0.3/net40/unity-custom/nunit.framework.dll</HintPath>
      </Reference>
+     <Reference Include="Google.JarResolver">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/ExternalDependencyManager/Editor/1.2.181/Google.JarResolver.dll</HintPath>
+     </Reference>
      <Reference Include="Firebase.App">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+     </Reference>
+     <Reference Include="unityplastic">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collab-proxy@2.6.0/Lib/Editor/unityplastic.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Plastic.Antlr3.Runtime">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collab-proxy@2.6.0/Lib/Editor/Unity.Plastic.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Firebase.Firestore">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Firestore.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.Plastic.Newtonsoft.Json">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collab-proxy@2.6.0/Lib/Editor/Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+     </Reference>
      <Reference Include="Firebase.TaskExtension">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
+     </Reference>
+     <Reference Include="log4netPlastic">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.collab-proxy@2.6.0/Lib/Editor/log4netPlastic.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.IonicZip">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/Dependencies/DotNetZip/Unity.VisualScripting.IonicZip.dll</HintPath>
      </Reference>
      <Reference Include="Firebase.Auth">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
      </Reference>
+     <Reference Include="Google.VersionHandlerImpl">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/ExternalDependencyManager/Editor/1.2.181/Google.VersionHandlerImpl.dll</HintPath>
+     </Reference>
      <Reference Include="Firebase.Database">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
+     </Reference>
+     <Reference Include="Google.VersionHandler">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
      </Reference>
      <Reference Include="Newtonsoft.Json">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualScripting.TextureAssets">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.visualscripting@1.9.1/Editor/VisualScripting.Core/EditorAssetResources/Unity.VisualScripting.TextureAssets.dll</HintPath>
      </Reference>
      <Reference Include="Mono.Cecil">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/PackageCache/com.unity.nuget.mono-cecil@1.11.4/Mono.Cecil.dll</HintPath>
@@ -457,6 +375,15 @@
      </Reference>
      <Reference Include="Google.MiniJson">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+     </Reference>
+     <Reference Include="Google.IOSResolver">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/ExternalDependencyManager/Editor/1.2.181/Google.IOSResolver.dll</HintPath>
+     </Reference>
+     <Reference Include="Google.PackageManagerResolver">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/ExternalDependencyManager/Editor/1.2.181/Google.PackageManagerResolver.dll</HintPath>
+     </Reference>
+     <Reference Include="Firebase.Editor">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Assets/Firebase/Editor/Firebase.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Android.Types">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll</HintPath>
@@ -833,228 +760,35 @@
      <Reference Include="mscorlib">
      <HintPath>/Applications/Unity/Hub/Editor/2022.3.13f1/Unity.app/Contents/NetStandard/compat/2.1.0/shims/netfx/mscorlib.dll</HintPath>
      </Reference>
-     <Reference Include="Utilities.WebSockets.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.WebSockets.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Encoding.Wav">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Encoding.Wav.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Burst.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Path.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Common.Path.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Rest.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Rest.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Async.Addressables">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Async.Addressables.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.PixelPerfect.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Audio">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Audio.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Aseprite.Common">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Aseprite.Common.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Sprite.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Flow">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.Flow.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Extensions">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Extensions.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Collections">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.SpriteShape.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.SpriteShape.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.PixelPerfect">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
-     </Reference>
-     <Reference Include="PPv2URPConverters">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/PPv2URPConverters.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Audio.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Audio.Editor.dll</HintPath>
+     <Reference Include="OpenAI">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/OpenAI.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Aseprite.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Aseprite.Editor.dll</HintPath>
+     <Reference Include="Utilities.Async">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Async.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipelines.Universal.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+     <Reference Include="Utilities.Audio">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Audio.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+     <Reference Include="Utilities.Encoding.Wav">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Encoding.Wav.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.EditorCoroutines.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.EditorCoroutines.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="PsdPlugin">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Burst">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
-     </Reference>
-     <Reference Include="OpenAI.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/OpenAI.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Async.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Async.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Timeline.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Shared.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.Shared.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.ShaderGraph.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Core">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Extras">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Tilemap.Extras.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Core.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.Core.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Extensions.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Extensions.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.WebSockets">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.WebSockets.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEditorBridge.005">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.005.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.Flow.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.Flow.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEngineBridge.001">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
-     </Reference>
-     <Reference Include="OpenAI">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/OpenAI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Runtime">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Extensions.Addressables">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Extensions.Addressables.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Timeline">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.InternalAPIEditorBridge.001">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Psdimporter.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.State.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.State.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Encoding.Wav.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Encoding.Wav.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Common.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+     <Reference Include="Utilities.Extensions">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Extensions.dll</HintPath>
      </Reference>
      <Reference Include="Utilities.Rest">
      <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Rest.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Searcher.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Utilities.Async">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Utilities.Async.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.VisualScripting.State">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.SpriteShape.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.SpriteShape.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Tilemap.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.Animation.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.2D.IK.Editor">
-     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>/Users/mohammedamin/Desktop/Projects/genai-choice-sim/Netflix_Unity/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="OpenAI.Samples.Chat.csproj">
-      <Project>{00a729e5-0e41-a979-2ecb-a65d45735da5}</Project>
-      <Name>OpenAI.Samples.Chat</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Firebase.Extensions;
 using UnityEngine;
@@ -8,10 +9,16 @@ using FirebaseNetworkKit;
 public class InitialSelectionManager : MonoBehaviour
 {
     public GameObject InitialSelectionScreen; // Reference to the UI screen for initial selection
+    public GameObject LoadingScreen; // Reference to the loading screen UI
     public Button LeagueOfLegendsButton; // Button for "League of Legends"
     public Button DraculaButton; // Button for "Dracula"
+    public Text LoadingText; // Optional: Text on the loading screen for animation
 
     private FirebaseFirestore db;
+
+    public GameObject CoroutineHandler; // Reference to the CoroutineHandler GameObject
+
+    private Coroutine loadingAnimationCoroutine;
 
     private void Start()
     {
@@ -23,25 +30,94 @@ public class InitialSelectionManager : MonoBehaviour
     }
 
     private void OnSelectionMade(string selection)
+{
+    Debug.Log($"User selected: {selection}");
+
+    if (CoroutineHandler == null)
     {
-        Debug.Log($"User selected: {selection}");
-        
-        // Upload the selection to Firestore
-        UploadSelectionToFirestore(selection);
-
-        // Hide the initial selection screen
-        InitialSelectionScreen.SetActive(false);
-
-        // Notify PythonListener to start processing JSON
-        FindObjectOfType<PythonListener>().FetchJsonFromStorage(selection);
+        Debug.LogError("CoroutineHandler is not assigned or active.");
+        return;
     }
+
+    if (LoadingScreen == null)
+    {
+        Debug.LogError("LoadingScreen is not assigned.");
+    }
+
+    CoroutineHandler.GetComponent<CoroutineHandler>().StartCoroutine(ProcessSelectionWithLoadingScreen(selection));
+}
+
+private IEnumerator ProcessSelectionWithLoadingScreen(string selection)
+{
+    Debug.Log($"Processing selection: {selection}");
+
+    // Show the loading screen
+    if (LoadingScreen != null)
+    {
+        Debug.Log("Activating LoadingScreen...");
+        LoadingScreen.SetActive(true);
+
+        // Start the loading animation
+        if (LoadingText != null)
+        {
+            Debug.Log("Starting LoadingAnimation...");
+            loadingAnimationCoroutine = CoroutineHandler.GetComponent<CoroutineHandler>().StartCoroutine(LoadingAnimation());
+        }
+    }
+    else
+    {
+        Debug.LogWarning("LoadingScreen is null.");
+    }
+
+    // Delay for 5 seconds
+    Debug.Log("Waiting for 5 seconds...");
+    yield return new WaitForSeconds(0.5f);
+
+    // Upload the selection to Firestore
+    UploadSelectionToFirestore(selection);
+
+    // Notify PythonListener to start processing JSON
+    var pythonListener = FindObjectOfType<PythonListener>();
+    if (pythonListener != null)
+    {
+        Debug.Log("Notifying PythonListener to fetch JSON...");
+        pythonListener.FetchJsonFromStorage(selection);
+    }
+    else
+    {
+        Debug.LogError("PythonListener not found in the scene.");
+    }
+
+    // Hide the loading screen
+    if (LoadingScreen != null)
+    {
+        Debug.Log("Deactivating LoadingScreen...");
+        LoadingScreen.SetActive(false);
+    }
+
+    // Stop the loading animation
+    if (loadingAnimationCoroutine != null)
+    {
+        Debug.Log("Stopping LoadingAnimation...");
+        CoroutineHandler.GetComponent<CoroutineHandler>().StopCoroutine(loadingAnimationCoroutine);
+        loadingAnimationCoroutine = null;
+    }
+
+    // Hide the initial selection screen
+    if (InitialSelectionScreen != null)
+    {
+        Debug.Log("Deactivating InitialSelectionScreen...");
+        InitialSelectionScreen.SetActive(false);
+    }
+}
+
 
     private void UploadSelectionToFirestore(string selection)
     {
         // Create a document with the selection
         var documentData = new Dictionary<string, object>
         {
-            { "content", selection } ,
+            { "content", selection },
             { "type", "initialStory" }
         };
 
@@ -60,5 +136,18 @@ public class InitialSelectionManager : MonoBehaviour
                     Debug.LogError($"Failed to upload selection: {task.Exception}");
                 }
             });
+    }
+
+    private IEnumerator LoadingAnimation()
+    {
+        string baseText = "Loading";
+        int dotCount = 0;
+
+        while (true)
+        {
+            LoadingText.text = baseText + new string('.', dotCount);
+            dotCount = (dotCount + 1) % 4; // Cycle through 0, 1, 2, 3 dots
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

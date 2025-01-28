@@ -77,6 +77,7 @@ namespace FirebaseNetworkKit
                         // Send JSON content to StoryLoader
                         StoryLoader.Instance.LoadStoryData(jsonContent);
 
+                        Debug.Log("sel story");
                         // Notify NodeManager to start the story
                         FindObjectOfType<NodeManager>().StartStoryFromSelection();
                     }
