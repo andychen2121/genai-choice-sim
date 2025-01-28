@@ -10,53 +10,6 @@ This game combines a **language model (LLM)** for generating branching narrative
 
 ---
 
-
-# 🔧 How to Run
-
-Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adventure Game** on your system:
-
-1. Set Up Firebase Credentials
-
-- Obtain the Firebase service account JSON file for your project.
-- Place the JSON file in the project directory (e.g., `firebase_credentials.json`).
-- Ensure the Firebase project has **Firestore** and **Firebase Storage** enabled.
-
-2. Install Python Dependencies
-
-- Make sure **Python 3.8+** is installed on your system.
-- Navigate to the project root directory and install the required dependencies:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
-3. Run the Backend
-
-- Start the authentication script to initialize Firebase and ensure the backend is set up:
-
-  ```bash
-  python auth.py
-  ```
-
-- The `auth.py` script will:
-
-  - Authenticate using the Firebase credentials.
-  - Verify Firestore and Storage connectivity.
-  - Set up any required data structures in Firestore for the game.
-
-4. Set Up Unity Frontend
-
-- Open the Unity project in the `Netflix_Unity/` folder using **Unity Hub**.
-- Verify that the Unity project successfully connects to Firebase:
-     - Check that Firestore and Storage integration scripts are enabled.
-     - Confirm that placeholder assets update dynamically.
-
-5. Run Unity
-
-- Click **Play** in the Unity Editor to start the game.
-- Watch as the game synchronizes real-time narrative and visuals using Firebase.
-
----
-
 ## 🔧 Key Features
 
 ### 1. **Interactive Storytelling with LLM**
@@ -101,6 +54,32 @@ Follow these steps to set up and run the **GenAI x Netflix Choose Your Own Adven
   - Firestore: Stores narrative JSONs and metadata.
   - Firebase Storage: Hosts large assets (images, videos).
 - Unity listens for data changes via Firestore's change streams and updates the game in real-time.
+
+---
+
+## 📂 Folder Structure
+
+- **`data/`**: Organizes game data (e.g., story seeds, generated narratives).
+- **`release/`**: Contains production-ready assets:
+  - Python scripts for LLM and image generation.
+  - Unity assets for frontend integration.
+- **`sandbox/`**: Proof-of-concept prototypes for LLM and image model fine-tuning.
+- **`.gitignore`**: Ensures sensitive files (e.g., Firebase credentials) are excluded.
+- **`requirements.txt`**: Python dependencies for the backend.
+
+---
+
+## 🚧 Development Workflow
+
+1. **Static Story Generation**:
+   - Generates the initial narrative tree with multiple layers for immediate exploration.
+   - Example: Root node → 4 choices → 16 sub-nodes.
+2. **Dynamic Real-Time Expansion**:
+   - New nodes are created dynamically as players progress.
+   - Ensures seamless branching with low latency.
+
+3. **Real-Time Synchronization**:
+   - Firebase ensures that both narrative and visuals update instantly in Unity.
 
 ---
 
